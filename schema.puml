@@ -1,0 +1,19 @@
+@startuml
+
+object LoginPage
+
+LoginPage->SSO API: SignUp Request
+
+SSO API->PostgreSQL: Save information about user
+
+SSO API->LoginPage: SignUp Response
+
+LoginPage-->ConverterPage: Swap
+ConverterPage->UAS API: Get data packages info
+ConverterPage->CMS API: convert data
+
+CMS API->Amazon S3: Save converted data
+CMS API->PostgreSQL: Save data package info
+
+UAS API->ConverterPage: Convertion response
+@enduml
